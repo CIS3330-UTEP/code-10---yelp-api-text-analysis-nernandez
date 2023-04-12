@@ -1,0 +1,33 @@
+from yelpapi import YelpAPI
+import pandas as pd
+
+api_key = "IeYMIbfeOMCZK6gEUVNS2a2PDy1_J9SRbrsAIwyD4c08NYsfc0D8pKjZYTSTOQ2_0MLII4lVnblTUCsoJ6u7FeC2vknWH8unSIX44Wew9uoLh9VyZeKrEshnzTw0ZHYx"
+yelp_api = YelpAPI(api_key)
+
+search_term = "pizza"
+search_location = "Chicago, IL"
+search_sort_by = "rating" #best_match, rating, review_count, distance
+search_limit = 20
+
+search_results = yelp_api.search_query(term=search_term, location=search_location, sort_by = search_sort_by, limit = search_limit)
+
+print(search_results)
+
+# for business in search_results['businesses']:
+#    print(business['name'])
+#    print(business['alias'])
+#    print("\n")
+
+results_df = pd.DataFrame.from_dict(search_results['businesses'])
+print(results_df['alias'])
+id_for_review = "montis-chicago"
+
+review_results = yelp_api.reviews_query(id=id_for_review)
+# print(review_results)
+
+# for review in review_results['reviews']:
+#    print(review)
+#    print("\n\n")
+
+reviews_df = pd.DataFrame.from_dict(review_results)
+print(reviews_df)
