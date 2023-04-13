@@ -18,7 +18,8 @@ search_results = yelp_api.search_query(
 
 print(search_results)
 
-id_for_review = '"pieology-pizzeria-el-paso-7","crazy-daves-pizza-el-paso"'
+#id_for_review = "pieology-pizzeria-el-paso-7"
+id_for_review = ['pieology-pizzeria-el-paso-7','crazy-daves-pizza-el-paso']
 review_results = yelp_api.reviews_query(id=id_for_review)
 print(review_results)
 
