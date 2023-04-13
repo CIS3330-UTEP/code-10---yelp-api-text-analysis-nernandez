@@ -6,24 +6,37 @@ yelp_api = YelpAPI(api_key)
 
 search_term = "pizza"
 search_location = "El Paso, TX"
-search_sort_by = "rating" #best_match, rating, review_count, distance
+search_sort_by = "best_match" #best_match, rating, review_count, distance
 search_limit = 20
+search_offset = 20
 
-search_results = yelp_api.search_query(term=search_term, location=search_location, sort_by = search_sort_by, limit = search_limit)
+search_results = yelp_api.search_query(
+    term=search_term, location=search_location, 
+    sort_by = search_sort_by, 
+    limit = search_limit, 
+    offset = search_offset)
 
-# print(search_results)
+print(search_results)
+
+id_for_review = '"pieology-pizzeria-el-paso-7","crazy-daves-pizza-el-paso"'
+review_results = yelp_api.reviews_query(id=id_for_review)
+print(review_results)
+
+for review in review_results['reviews']:
+    print(review['text'])
+    print("\n\n")
 
 # for business in search_results['businesses']:
 #    print(business['name'])
 #    print(business['alias'])
 #    print("\n")
 
-results_df = pd.DataFrame.from_dict(search_results['businesses'])
-print(results_df['alias'])
-id_for_review = "montis-chicago"
+# results_df = pd.DataFrame.from_dict(search_results['businesses'])
+# print(results_df['alias'])
+# id_for_review = "montis-chicago"
 
-review_results = yelp_api.reviews_query(id=id_for_review)
-print(review_results)
+# review_results = yelp_api.reviews_query(id=id_for_review)
+# print(review_results)
 
 # for review in review_results['reviews']:
 #    print(review)
