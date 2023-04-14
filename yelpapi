@@ -6,45 +6,47 @@ yelp_api = YelpAPI(api_key)
 
 search_term = "pizza"
 search_location = "El Paso, TX"
-search_sort_by = "best_match" #best_match, rating, review_count, distance
+search_sort_by = "rating" #best_match, rating, review_count, distance
 search_limit = 20
 search_offset = 20
 
 search_results = yelp_api.search_query(
     term=search_term, location=search_location, 
     sort_by = search_sort_by, 
-    limit = search_limit, 
-    offset = search_offset)
+    limit = search_limit, offset=search_offset)
 
 print(search_results)
 
 id_for_review = "pieology-pizzeria-el-paso-7"
-#id_for_review = ['pieology-pizzeria-el-paso-7','crazy-daves-pizza-el-paso']
 review_results = yelp_api.reviews_query(id=id_for_review)
-print(review_results)
+
+id_for_review2 = "cassava-el-paso"
+review_results2 = yelp_api.reviews_query(id=id_for_review2)
+
+id_for_review3 = 'westside-pizza-express-el-paso'
+review_results3 = yelp_api.reviews_query(id=id_for_review3)
+
+print('Review results for pieology-pizzeria')
+print('')
 
 for review in review_results['reviews']:
     print(review['text'])
     print("\n\n")
 
-results_df = pd.DataFrame.from_dict(review_results['reviews'])
-print(results_df)
+print('Review results for cassava-el-paso')
+print('')
 
-# for business in search_results['businesses']:
-#    print(business['name'])
-#    print(business['alias'])
-#    print("\n")
+for review2 in review_results2['reviews']:
+    print(review2['text'])
+    print("\n\n")
 
-# results_df = pd.DataFrame.from_dict(search_results['businesses'])
-# print(results_df['alias'])
-# id_for_review = "montis-chicago"
+print('Review results for westside-pizza')
+print('')
 
-# review_results = yelp_api.reviews_query(id=id_for_review)
-# print(review_results)
+for review3 in review_results3['reviews']:
+    print(review3['text'])
+    print("\n\n")
 
-# for review in review_results['reviews']:
-#    print(review)
-#    print("\n\n")
-
-# reviews_df = pd.DataFrame.from_dict(review_results)
-# print(reviews_df)
+#results_df = pd.DataFrame.from_dict(review_results['reviews'])
+#print(results_df)
+#results_df.to_csv(f"{id_for_review}_yelpapi_businesses_results.csv")
