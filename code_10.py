@@ -1,23 +1,68 @@
-import nltk
-from nltk.corpus import stopwords
+from yelpapi import YelpAPI
+import pandas as pd
 
-reviews = open("tacos_reviews.txt")
-stop_words = set(stopwords.words('english'))
+api_key = "IeYMIbfeOMCZK6gEUVNS2a2PDy1_J9SRbrsAIwyD4c08NYsfc0D8pKjZYTSTOQ2_0MLII4lVnblTUCsoJ6u7FeC2vknWH8unSIX44Wew9uoLh9VyZeKrEshnzTw0ZHYx"
+yelp_api = YelpAPI(api_key)
 
-for review in reviews:
-    tokens = nltk.word_tokenize(review)
-    pos_tags = nltk.pos_tag(tokens)
-    new_text = []
-    for tag in pos_tags:
-        if tag[0] not in stop_words:
-            print(tag[0])
-            new_text.append(tag[0])
+search_term = "pizza"
+search_location = "El Paso, TX"
+search_sort_by = "rating" #best_match, rating, review_count, distance
+search_limit = 20
+search_offset = 20
 
-    for token in pos_tags:
-        if token[1] == 'JJ' or token[1] == 'JJS':
-            print(token[0])
+search_results = yelp_api.search_query(
+    term=search_term, location=search_location, 
+    sort_by = search_sort_by, 
+    limit = search_limit, offset=search_offset)
 
-print("\nOriginal")
-print(review)
-print("\nNew")
-print("".join(new_text))
+print(search_results)
+
+id_for_review = "pieology-pizzeria-el-paso-7"
+review_results = yelp_api.reviews_query(id=id_for_review)
+
+id_for_review2 = "grimaldis-pizzeria-el-paso-6"
+review_results2 = yelp_api.reviews_query(id=id_for_review2)
+
+id_for_review3 = 'flicks-pizza-clint'
+review_results3 = yelp_api.reviews_query(id=id_for_review3)
+
+id_for_review4 = 'la-toscana-juárez'
+review_results4 = yelp_api.reviews_query(id=id_for_review4)
+
+id_for_review5 = '1-8-pizza-pub-el-paso'
+review_results5 = yelp_api.reviews_query(id=id_for_review5)
+
+print('Review results for pieology-pizzeria')
+print('')
+
+for review in review_results['reviews']:
+    print(review['text'])
+    print("\n\n")
+
+print('Review results for grimaldis pizzeria')
+print('')
+
+for review2 in review_results2['reviews']:
+    print(review2['text'])
+    print("\n\n")
+
+print('Review results for flicks-pizza-clint')
+print('')
+
+for review3 in review_results3['reviews']:
+    print(review3['text'])
+    print("\n\n")
+
+print('Review results for la-toscana-juárez')
+print('')
+
+for review4 in review_results4['reviews']:
+    print(review4['text'])
+    print("\n\n")
+
+print('Review results for 1-8-pizza-pub')
+print('')
+
+for review5 in review_results5['reviews']:
+    print(review5['text'])
+    print("\n\n")
