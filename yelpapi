@@ -20,11 +20,17 @@ print(search_results)
 id_for_review = "pieology-pizzeria-el-paso-7"
 review_results = yelp_api.reviews_query(id=id_for_review)
 
-id_for_review2 = "cassava-el-paso"
+id_for_review2 = "grimaldis-pizzeria-el-paso-6"
 review_results2 = yelp_api.reviews_query(id=id_for_review2)
 
-id_for_review3 = 'westside-pizza-express-el-paso'
+id_for_review3 = 'flicks-pizza-clint'
 review_results3 = yelp_api.reviews_query(id=id_for_review3)
+
+id_for_review4 = 'la-toscana-juárez'
+review_results4 = yelp_api.reviews_query(id=id_for_review4)
+
+id_for_review5 = '1-8-pizza-pub-el-paso'
+review_results5 = yelp_api.reviews_query(id=id_for_review5)
 
 print('Review results for pieology-pizzeria')
 print('')
@@ -33,18 +39,32 @@ for review in review_results['reviews']:
     print(review['text'])
     print("\n\n")
 
-print('Review results for cassava-el-paso')
+print('Review results for grimaldis pizzeria')
 print('')
 
 for review2 in review_results2['reviews']:
     print(review2['text'])
     print("\n\n")
 
-print('Review results for westside-pizza')
+print('Review results for flicks-pizza-clint')
 print('')
 
 for review3 in review_results3['reviews']:
     print(review3['text'])
+    print("\n\n")
+
+print('Review results for la-toscana-juárez')
+print('')
+
+for review4 in review_results4['reviews']:
+    print(review4['text'])
+    print("\n\n")
+
+print('Review results for 1-8-pizza-pub')
+print('')
+
+for review5 in review_results5['reviews']:
+    print(review5['text'])
     print("\n\n")
 
 #results_df = pd.DataFrame.from_dict(review_results['reviews'])
